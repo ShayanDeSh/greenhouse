@@ -11,5 +11,6 @@ steps:
       image: golang
       commands:
         - "cd ./server"
+        - "go run ./cmd/main.go"
         - "go test ./... -v"
 
