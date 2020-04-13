@@ -8,7 +8,7 @@ import (
 
 func Init() (db *gorm.DB, err error) {
 	db, err = gorm.Open("postgres",
-		"host=localhost port=5432 user=postgres dbname=greenhouse password=mypassword")
+		"host=localhost port=5432 user=postgres dbname=greenhouse password=1234")
 	migrate(db)
 	return
 }
