@@ -13,4 +13,8 @@ steps:
         - "cd ./server"
         - "go run ./cmd/main.go&"
         - "go test ./... -v"
-
+trigger:
+    branch:
+        - master
+    event:
+        - push
