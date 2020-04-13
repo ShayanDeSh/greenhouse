@@ -12,22 +12,30 @@ type Plant struct {
 	Threshhold int
 }
 
-func AddPlant(threshhold int, needwater bool, humidity int, ip string, db *gorm.DB) {
+type Plants struct {
+	db *gorm.DB
+}
+
+func NewPlants(db *gorm.DB) *Plants {
+	return &Plants{db}
+}
+
+func (p *Plants) AddPlant(threshhold int, needwater bool, humidity int, ip string) {
 	var plant = Plant{
 		Ip:         ip,
 		Humidity:   humidity,
 		NeedWater:  needwater,
 		Threshhold: threshhold,
 	}
-	db.Create(&plant)
+	p.db.Create(&plant)
 }
 
-func DeletePlant(ID int, db *gorm.DB) (err error) {
-	err = db.Where("id = ?", ID).Delete(&Plant{}).Error
+func (p *Plants) DeletePlant(ID int) (err error) {
+	err = p.db.Where("id = ?", ID).Delete(&Plant{}).Error
 	return err
 }
 
-func UpdatePlant(plant Plant, db *gorm.DB) error {
-	err := db.Save(&plant).Error
+func (p *Plants) UpdatePlant(plant Plant) error {
+	err := p.db.Save(&plant).Error
 	return err
 }

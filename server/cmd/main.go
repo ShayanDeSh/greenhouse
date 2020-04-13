@@ -6,10 +6,12 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/nothingrealm/greenhouse/server/pkg/api"
 	"github.com/nothingrealm/greenhouse/server/pkg/db"
+	"github.com/nothingrealm/greenhouse/server/pkg/db/models"
 )
 
 func main() {
-	_, err := db.Init()
+	db, err := db.Init()
+	p := models.NewPlants(db)
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -20,9 +22,11 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.Logger())
 
+	//
+
 	// Router initialization
 	v1 := e.Group("/v1")
-	h := api.NewHandler()
+	h := api.NewHandler(p)
 	h.Register(v1)
 
 	e.Logger.Fatal(e.Start(":8000"))
