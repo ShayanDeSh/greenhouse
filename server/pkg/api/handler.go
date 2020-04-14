@@ -40,3 +40,15 @@ func (h *Handler) UpdatePlant(c echo.Context) (err error) {
 	}
 	return c.JSON(http.StatusOK, p)
 }
+
+func (h *Handler) DeletePlant(c echo.Context) (err error) {
+	m := echo.Map{}
+	if err = c.Bind(&m); err != nil {
+		return c.String(http.StatusBadRequest, err.Error())
+	}
+	id := int(m["id"].(float64))
+	if err = h.plants.Delete(id); err != nil {
+		return c.String(http.StatusBadRequest, err.Error())
+	}
+	return c.String(http.StatusOK, "Deleted\n")
+}
