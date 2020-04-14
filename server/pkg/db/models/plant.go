@@ -26,7 +26,7 @@ func (p *Plants) Add(plant *Plant) (err error) {
 }
 
 func (p *Plants) Delete(ID int) (err error) {
-	err = p.db.Where("id = ?", ID).Delete(&Plant{}).Error
+	err = p.db.Unscoped().Where("id = ?", ID).Delete(&Plant{}).Error
 	return err
 }
 
