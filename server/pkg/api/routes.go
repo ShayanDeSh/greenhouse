@@ -9,4 +9,5 @@ func (h *Handler) Register(v *echo.Group) {
 
 	plantGroup := v.Group("/plants")
 	plantGroup.POST("/add", h.AddPlant)
+	plantGroup.POST("/update", h.UpdatePlant)
 }
