@@ -4,11 +4,13 @@ name: default
 steps:
     - name: build
       image: golang
+      network_mode: minet
       commands:
         - "cd ./server/cmd"
         - "go build ./..."
     - name: test
       image: golang
+      network_mode: host
       commands:
         - "cd ./server"
         - "go run ./cmd/main.go&"
