@@ -6,4 +6,7 @@ import (
 
 func (h *Handler) Register(v *echo.Group) {
 	v.GET("/hello", h.Hello)
+
+	plantGroup := v.Group("/plants")
+	plantGroup.POST("/add", h.AddPlant)
 }
