@@ -28,3 +28,15 @@ func (h *Handler) AddPlant(c echo.Context) (err error) {
 	}
 	return c.JSON(http.StatusCreated, p)
 }
+
+func (h *Handler) UpdatePlant(c echo.Context) (err error) {
+	p := new(models.Plant)
+
+	if err = c.Bind(p); err != nil {
+		return c.String(http.StatusBadRequest, err.Error())
+	}
+	if err = h.plants.Update(p); err != nil {
+		return c.String(http.StatusBadRequest, err.Error())
+	}
+	return c.JSON(http.StatusOK, p)
+}
