@@ -17,3 +17,14 @@ func NewHandler(plants *models.Plants) *Handler {
 func (h *Handler) Hello(c echo.Context) error {
 	return c.String(http.StatusOK, "Hello\n")
 }
+
+func (h *Handler) AddPlant(c echo.Context) (err error) {
+	p := new(models.Plant)
+	if err = c.Bind(p); err != nil {
+		return c.String(http.StatusBadRequest, err.Error())
+	}
+	if err = h.plants.Add(p); err != nil {
+		return c.String(http.StatusBadRequest, err.Error())
+	}
+	return c.JSON(http.StatusCreated, p)
+}
