@@ -30,7 +30,7 @@ func (p *Plants) Delete(ID int) (err error) {
 	return err
 }
 
-func (p *Plants) Update(plant Plant) error {
-	err := p.db.Save(&plant).Error
+func (p *Plants) Update(plant *Plant) error {
+	err := p.db.Model(&plant).Updates(&plant).Error
 	return err
 }
