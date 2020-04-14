@@ -6,10 +6,10 @@ import (
 
 type Plant struct {
 	gorm.Model
-	Ip         string `gorm:"size:15;unique;not null"`
-	Humidity   int
-	NeedWater  bool
-	Threshhold int
+	Ip         string `gorm:"size:15;unique;not null" json:"Ip"`
+	Humidity   int    `json:"Humidity"`
+	NeedWater  bool   `json:"NeedWater"`
+	Threshhold int    `json:"Threshhold"`
 }
 
 type Plants struct {
@@ -20,22 +20,17 @@ func NewPlants(db *gorm.DB) *Plants {
 	return &Plants{db}
 }
 
-func (p *Plants) AddPlant(threshhold int, needwater bool, humidity int, ip string) {
-	var plant = Plant{
-		Ip:         ip,
-		Humidity:   humidity,
-		NeedWater:  needwater,
-		Threshhold: threshhold,
-	}
-	p.db.Create(&plant)
+func (p *Plants) Add(plant *Plant) (err error) {
+	err = p.db.Create(plant).Error
+	return err
 }
 
-func (p *Plants) DeletePlant(ID int) (err error) {
+func (p *Plants) Delete(ID int) (err error) {
 	err = p.db.Where("id = ?", ID).Delete(&Plant{}).Error
 	return err
 }
 
-func (p *Plants) UpdatePlant(plant Plant) error {
+func (p *Plants) Update(plant Plant) error {
 	err := p.db.Save(&plant).Error
 	return err
 }
