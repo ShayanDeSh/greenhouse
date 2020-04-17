@@ -1,6 +1,7 @@
 #include "Arduino.h"
 #include <ESP8266WiFi.h>
 #include "connection.h"
+#include "server.h"
 
 void setup()
 {
@@ -8,6 +9,7 @@ void setup()
     Serial.println();
 
     connect();
+    route();
 }
 
 void loop()
