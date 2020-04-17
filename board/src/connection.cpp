@@ -4,12 +4,13 @@ struct con_config
 {
     String SSID;
     String pass;
+    String IP;
 } config;
 
 bool connect() 
 {
-    config.SSID = "SSID";
-    config.pass = "PASS";
+    config.SSID = "shayan2";
+    config.pass = "pwolpcgeplir";
     WiFi.begin(config.SSID, config.pass);
     Serial.print("Connecting");
     while (WiFi.status() != WL_CONNECTED)
@@ -18,7 +19,8 @@ bool connect()
         Serial.print(".");
     }
     Serial.println();
+    config.IP = WiFi.localIP().toString();
     Serial.print("Connected, IP address: ");
-    Serial.println(WiFi.localIP());
+    Serial.println(config.IP);
 }
 
