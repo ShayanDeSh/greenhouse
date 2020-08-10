@@ -25,9 +25,6 @@ NOTICE: the board ip is returned to serial out put when you first run your progr
 - second part is responsible for reading data from sensor periodically and sending it to
 server at specific times through interface designed on server
 
-- For using less energy this program is based on Async ESP framework which means the api is only active 
-when a request has been arived from user
-
 - Almost no memory is used for saving data on arduino as we use an external database for saving data
 and for using less energy for sending data we only read and send data due to specifc times
 
