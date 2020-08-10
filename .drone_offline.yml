@@ -1,0 +1,17 @@
+kind: pipeline
+type: docker
+name: default
+steps:
+    - name: test
+      image: golang
+      network_mode: host
+      commands:
+        - "ping 192.168.0.1 -c 10"
+        - "cd ./server"
+        - "go run ./cmd/main.go&"
+        - "go test ./... -v"
+trigger:
+    branch:
+        - master
+    event:
+        - push

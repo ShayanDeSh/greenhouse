@@ -2,5 +2,13 @@
 #include "Arduino.h"
 #include <stdbool.h>
 
-bool connect();
+struct con_config 
+{
+    String SSID;
+    String pass;
+    String IP;
+    String serverAdr;
+};
+
+struct con_config connect();
 

@@ -1,13 +1,16 @@
 #include <server.h>
 #include "moisture.h"
+#include "AsyncJson.h"
+#include "ArduinoJson.h"
 
 AsyncWebServer server(80);
 
 void notFound(AsyncWebServerRequest *request) {
-        request->send(404, "text/plain", "Not found");
+    request->send(404, "text/plain", "Not found");
 }
 
-void route()
+
+void route(struct con_config config)
 {
     Serial.println("routing");   
     server.on("/", HTTP_ANY, [] (AsyncWebServerRequest *request) {
@@ -19,8 +22,10 @@ void route()
         request->send(200, "text/plain", String(moist));
     });
 
+    server.on("/server", HTTP_POST, [config](AsyncWebServerRequest *request) {
+        request->send(201, "text/plain", "Server Added");
+    });
+
     server.onNotFound(notFound);    
     server.begin();
 }
-
-
