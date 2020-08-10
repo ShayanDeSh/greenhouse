@@ -2,7 +2,7 @@
 
 This program is consisted of two parts: server and board
 
-##Server
+## Server
 
 - This is the part which is responsible for listening to boards request and storing
 the sent data to database. This part is developed using go programming language and uses
@@ -11,7 +11,7 @@ postgresql as database so you must have both installed on you computer
 - To execute server you should run the following command:
 cd server; go run ./cmd/main.go
 
-##Board
+## Board
 
 This program is built upon arduino and  platformio so you must have both installed
 
